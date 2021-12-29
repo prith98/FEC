@@ -75,7 +75,7 @@ function IndividualQandA () {
   // Will show "LOADING..." until
   // currentQuestion object has been resolved in qna.js
   // and successfully passed down to this component
-  if (currentQuestion === null) {
+  if (cqCopy === null) {
     return (
       <div>
         LOADING...

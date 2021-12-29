@@ -11,18 +11,37 @@ function SearchQuestions (props) {
     setQuery(e.target.value);
   }
 
+  const onQueryChange = function () {
+    let testArr = filteredQuestion()
+    console.log(testArr);
+  }
+
+  const usePrevious = function (value) {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  }
+
   const filteredQuestion = function() {
 
     const result = currentQuestion.filter(oneQuestion =>
       oneQuestion.question_body.toLowerCase().includes(query.toLowerCase())
     );
-    console.log(result)
-    console.log(currentQuestion)
+
+    return result;
+
+    // setTimeout(() => {
+    //   console.log(result);
+    //   setCurrentQuestion(result);
+    // }, 1000)
+
   }
 
   useEffect(() => {
 
-    query.length >= 3 && filteredQuestion()
+    cqCopy && cqCopy.length && onQueryChange()
 
   })
 
