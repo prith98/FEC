@@ -29,6 +29,19 @@ function IndividualQandA () {
       })
   }
 
+  // Send a PUT Request for a specific Answer ID to mark it as helpful and increase helpful count on server
+
+  const updateAHelpful = function(e) {
+    let aID = e.currentTarget.dataset.id;
+    axios
+      .put('/qa/answers/' + aID.toString() + '/helpful')
+      .then((results) => {
+        console.log('Successfully marked answer ' + aID.toString() + ' as helpful');
+      })
+      .then(updateCPID())
+  }
+
+
   // Send a PUT Request for a specific Question ID if it was helpful to increase the helpful count on server
   const updateQHelpful = function(e) {
     let qID = e.currentTarget.dataset.id;
@@ -111,7 +124,7 @@ function IndividualQandA () {
           return (
             <div key={oneAnswer.id}>
               <div className="answerBody">A: {oneAnswer.body}</div>
-              <div className="answerBottomText">by {oneAnswer.answerer_name}, {oneAnswer.date.slice(0,10)}   |   Helpful? <u>Yes</u>({oneAnswer.helpfulness})   |   <u>Report</u></div>
+              <div className="answerBottomText">by {oneAnswer.answerer_name}, {oneAnswer.date.slice(0,10)}   |   Helpful? <span data-id={oneAnswer.id} onClick={updateAHelpful}><u>Yes</u></span>({oneAnswer.helpfulness})   |   <u>Report</u></div>
             </div>
           );
         });
