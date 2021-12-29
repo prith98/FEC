@@ -2,24 +2,29 @@ import React, { useState, useContext, useEffect} from 'react';
 import {MainContext} from '../contexts/contexts.js'
 import Axios from 'axios';
 
-function SearchQuestions () {
+function SearchQuestions (props) {
 
-  const {products, setProducts, currentProductId, setCurrentProductId, currentQuestion, setCurrentQuestion} = useContext(MainContext);
-  const [query, setQuery] = useState("");
-  const [startFiltering, setStartFilter] = useState(false);
+  const {products, setProducts, currentProductId, setCurrentProductId, cqCopy, setCQCopy,
+     currentQuestion, setCurrentQuestion, query, setQuery, filteredQuestions, setFilteredQuestions} = useContext(MainContext);
 
   const onFormChange = function(e) {
     setQuery(e.target.value);
-    if (query.length >= 3) {
-      setStartFilter(true);
-    }
+  }
+
+  const filteredQuestion = function() {
+
+    const result = currentQuestion.filter(oneQuestion =>
+      oneQuestion.question_body.toLowerCase().includes(query.toLowerCase())
+    );
+    console.log(result)
+    console.log(currentQuestion)
   }
 
   useEffect(() => {
 
-    console.log('hello')
+    query.length >= 3 && filteredQuestion()
 
-  }, [startFiltering])
+  })
 
   return (
     <form id="formQASearch">

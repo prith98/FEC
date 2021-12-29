@@ -4,7 +4,8 @@ import axios from 'axios';
 
 function IndividualQandA () {
 
-  const {products, setProducts, currentProductId, setCurrentProductId, allQuestions, setAllQuestions, currentQuestion, setCurrentQuestion} = useContext(MainContext);
+  const {products, setProducts, currentProductId, setCurrentProductId, cqCopy, setCQCopy,
+    allQuestions, setAllQuestions, currentQuestion, setCurrentQuestion, query, setQuery, filteredQuestions, setFilteredQuestions} = useContext(MainContext);
   const [currentAnswers, setCurrentAnswers] = useState(null);
   const [questionIDs, setQuestionIDs] = useState(null);
 
