@@ -5,12 +5,35 @@ import Axios from 'axios';
 function SearchQuestions () {
 
   const {products, setProducts, currentProductId, setCurrentProductId, currentQuestion, setCurrentQuestion} = useContext(MainContext);
+  const [query, setQuery] = useState("");
+  const [startFiltering, setStartFilter] = useState(false);
 
+  const onFormChange = function(e) {
+    setQuery(e.target.value);
+    if (query.length >= 3) {
+      setStartFilter(true);
+    }
+  }
+
+  useEffect(() => {
+
+    console.log('hello')
+
+  }, [startFiltering])
 
   return (
-    <div>
-      <div id="searchBar">Search</div>
-    </div>
+    <form id="formQASearch">
+      <label>
+        <input
+          name="search"
+          id="QASearch"
+          type="text"
+          value={query}
+          placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."
+          onChange={onFormChange}
+          />
+      </label>
+    </form>
   )
 
 }

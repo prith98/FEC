@@ -162,17 +162,26 @@ img {vertical-align: middle;}
 
 }
 
+form#formQASearch {
+  width: 80%;
+  margin: 50px auto;
+  position: relative;
+}
+
+input#QASearch {
+  width: 80%;
+  padding: 12px 20px;
+  margin: 50px auto;
+  box-sizing: border-box;
+  position: relative;
+}
+
 h1#QAHeader {
   width: 80%;
   margin: 50px auto;
   position: relative;
 }
 
-#searchBar {
-  width: 80%;
-  margin: 50px auto;
-  position: relative;
-}
 
 /* Start Brett Section Here*/
 .ratingsAndReviews {
