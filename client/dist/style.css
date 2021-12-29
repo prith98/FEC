@@ -162,6 +162,12 @@ img {vertical-align: middle;}
 
 }
 
+h1#QAHeader {
+  width: 80%;
+  margin: 50px auto;
+  position: relative;
+}
+
 #searchBar {
   width: 80%;
   margin: 50px auto;

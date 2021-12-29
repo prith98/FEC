@@ -43,6 +43,7 @@ function Qna () {
 
   return (
     <div>
+      <h1 id="QAHeader">Question & Answers</h1>
       {/* Passing down all the state values to SearchQuestions and IndividualQandA */}
       <MainContext.Provider value={{products, setProducts, currentProductId, setCurrentProductId, allQuestions, setAllQuestions, currentQuestion, setCurrentQuestion}}>
           <SearchQuestions />
