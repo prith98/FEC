@@ -30,7 +30,6 @@ function IndividualQandA () {
   }
 
   // Send a PUT Request for a specific Answer ID to mark it as helpful and increase helpful count on server
-
   const updateAHelpful = function(e) {
     let aID = e.currentTarget.dataset.id;
     axios
@@ -38,51 +37,19 @@ function IndividualQandA () {
       .then((results) => {
         console.log('Successfully marked answer ' + aID.toString() + ' as helpful');
       })
-      .then(updateCPID())
+      .then(() => {updateCPID()})
   }
 
 
   // Send a PUT Request for a specific Question ID if it was helpful to increase the helpful count on server
   const updateQHelpful = function(e) {
     let qID = e.currentTarget.dataset.id;
-    let currentID;
-    let stateCopy = questionIDs
-    for (let i = 0; i < stateCopy.length; i++) {
-      if (stateCopy[i][qID] === undefined) {
-        continue;
-      } else if (stateCopy[i][qID] === true){
-        // console.log(qID, stateCopy[i][qID]);
-        axios
-          .put('/qa/questions/' + qID.toString() + '/helpful')
-          .then((results) => {
-            console.log('successfully made PUT Request');
-          })
-          .then(updateCPID())
-          .then(() => {
-            stateCopy[i][qID] = false;
-            console.log(stateCopy);
-            setQuestionIDs(stateCopy);
-          })
-      } else if (stateCopy[i][qID] === false) {
-        alert ('You have already marked this Question as helpful!');
-        return;
-      }
-    }
-    // if (questionIDs[qID] === true) {
-    // axios
-    //   .put('/qa/questions/' + qID.toString() + '/helpful')
-    //   .then((results) => {
-    //     console.log('success');
-    //   })
-    //   .then(updateCPID())
-    //   .then(() =>
-    //     stateCopy[qID] = false,
-    //     setQuestionIDs(stateCopy)
-    //   )
-    // } else {
-    //   console.log(stateCopy[qID])
-    //   alert ('You have already marked this question as helpful!')
-    // }
+    axios
+      .put('/qa/questions/' + qID.toString() + '/helpful')
+      .then((results) => {
+        console.log('Successfully marked question ' + qID + ' as helpful');
+      })
+      .then(() => {updateCPID()})
   }
 
   useEffect(() => {
