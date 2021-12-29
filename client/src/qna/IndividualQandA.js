@@ -20,6 +20,14 @@ function IndividualQandA () {
       })
   }
 
+  const updateCPID = function() {
+    axios
+      .get('/qa/questions?product_id=' + currentProductId)
+      .then((result) => {
+        setCurrentQuestion(result.data.results);
+      })
+  }
+
   // Send a PUT Request for a specific Question ID if it was helpful to increase the helpful count on server
   const updateQHelpful = function(e) {
     console.log(e.currentTarget.dataset.id);
@@ -29,6 +37,7 @@ function IndividualQandA () {
       .then((results) => {
         console.log('success');
       })
+      .then(updateCPID());
   }
 
   useEffect(() => {
@@ -44,7 +53,6 @@ function IndividualQandA () {
     });
     Promise.all(questionIDsArray).then((values) => {
       setQuestionIDs(values);
-      console.log(values);
     });
 
   }, [currentQuestion]);
