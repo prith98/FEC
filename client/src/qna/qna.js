@@ -44,11 +44,9 @@ function Qna () {
     Promise.all(currentQuestionData).then((values) => {
       setCurrentQuestion(values[0].results);
       setCQCopy(values[0].results);
-      // console.log(values[0].results[0]);
       for (let i = 0; i < values[0].results.length; i++) {
         questionIDsObj[values[0].results[i]["question_id"]] = true;
       }
-      // console.log(questionIDsObj)
       setQuestionIDs(questionIDsObj);
     })
   }, []);

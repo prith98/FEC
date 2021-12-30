@@ -43,11 +43,11 @@ function IndividualQandA () {
 
 
   // Send a PUT Request for a specific Question ID if it was helpful to increase the helpful count on server
+  // if user has already marked a question as helpful, will not send a PUT request and alert user that they
+  // have already marked this question as helpful
   const updateQHelpful = function(e) {
-    console.log(questionIDs)
     let qID = e.currentTarget.dataset.id;
     let questionIDsCopy = questionIDs;
-    console.log(questionIDsCopy[qID])
     if (questionIDs[qID]) {
       axios
         .put('/qa/questions/' + qID.toString() + '/helpful')
