@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import {MainContext} from '../contexts/contexts.js'
 import axios from 'axios';
 import IndividualQandA from '/client/src/qna/IndividualQandA.js';

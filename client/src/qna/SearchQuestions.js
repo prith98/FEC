@@ -1,49 +1,45 @@
-import React, { useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import {MainContext} from '../contexts/contexts.js'
 import Axios from 'axios';
 
 function SearchQuestions (props) {
 
-  const {products, setProducts, currentProductId, setCurrentProductId, cqCopy, setCQCopy,
-     currentQuestion, setCurrentQuestion, query, setQuery, filteredQuestions, setFilteredQuestions} = useContext(MainContext);
+  const {products, setProducts, currentProductId, setCurrentProductId, cqCopy, setCQCopy, currentQuestion, setCurrentQuestion, query, setQuery, filteredQuestions, setFilteredQuestions} = useContext(MainContext);
 
+  // Handles text change in query
   const onFormChange = function(e) {
     setQuery(e.target.value);
   }
 
+  // When query length is less than 3, question list is set to original list
+  // When query length is 3 or more, runs filtered question and sets question list to the filtered list
+  // When it goes back to less than 3, question list is set to the original again
   const onQueryChange = function () {
-    let testArr = filteredQuestion()
-    console.log(testArr);
+    if (query.length >= 3) {
+      let filter = filteredQuestion();
+      setCurrentQuestion(filter);
+    } else {
+      setCurrentQuestion(cqCopy)
+    }
   }
 
-  const usePrevious = function (value) {
-    const ref = useRef();
-    useEffect(() => {
-      ref.current = value;
-    });
-    return ref.current;
-  }
 
+  // Filters current question list based on whether or not
+  // the question in lower case contains lower case query string
   const filteredQuestion = function() {
-
     const result = currentQuestion.filter(oneQuestion =>
       oneQuestion.question_body.toLowerCase().includes(query.toLowerCase())
     );
-
     return result;
-
-    // setTimeout(() => {
-    //   console.log(result);
-    //   setCurrentQuestion(result);
-    // }, 1000)
-
   }
 
+  // useEffect only runs when query value is changed to prevent infinite loops
   useEffect(() => {
 
     cqCopy && cqCopy.length && onQueryChange()
 
-  })
+
+  }, [query])
 
   return (
     <form id="formQASearch">
