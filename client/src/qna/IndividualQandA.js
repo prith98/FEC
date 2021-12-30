@@ -5,9 +5,9 @@ import axios from 'axios';
 function IndividualQandA () {
 
   const {products, setProducts, currentProductId, setCurrentProductId, cqCopy, setCQCopy,
-    allQuestions, setAllQuestions, currentQuestion, setCurrentQuestion, query, setQuery, filteredQuestions, setFilteredQuestions} = useContext(MainContext);
+    allQuestions, setAllQuestions, currentQuestion, questionIDs, setQuestionIDs,
+     setCurrentQuestion, query, setQuery, filteredQuestions, setFilteredQuestions} = useContext(MainContext);
   const [currentAnswers, setCurrentAnswers] = useState(null);
-  const [questionIDs, setQuestionIDs] = useState(null);
 
   let currentAnswersData = [];
   let questionIDsArray = [];
@@ -44,29 +44,46 @@ function IndividualQandA () {
 
   // Send a PUT Request for a specific Question ID if it was helpful to increase the helpful count on server
   const updateQHelpful = function(e) {
+    console.log(questionIDs)
     let qID = e.currentTarget.dataset.id;
-    axios
-      .put('/qa/questions/' + qID.toString() + '/helpful')
-      .then((results) => {
-        console.log('Successfully marked question ' + qID + ' as helpful');
-      })
-      .then(() => {updateCPID()})
+    let questionIDsCopy = questionIDs;
+    console.log(questionIDsCopy[qID])
+    if (questionIDs[qID]) {
+      axios
+        .put('/qa/questions/' + qID.toString() + '/helpful')
+        .then((results) => {
+          console.log('Successfully marked question ' + qID + ' as helpful');
+        })
+        .then(() => {
+          updateCPID()
+        })
+        .then(() => {
+          questionIDsCopy[qID] = false;
+          setQuestionIDs(questionIDsCopy);
+        })
+    } else {
+      alert ('You have already marked this question as helpful!');
+    }
+
+    // axios
+    //   .put('/qa/questions/' + qID.toString() + '/helpful')
+    //   .then((results) => {
+    //     console.log('Successfully marked question ' + qID + ' as helpful');
+    //   })
+    //   .then(() => {
+    //     updateCPID()
+    //   })
   }
 
   useEffect(() => {
 
     currentQuestion && currentQuestion.length && currentQuestion.forEach((question) => {
-      let qID = question.question_id;
-      let newObj = {[question.question_id]: true};
-      questionIDsArray.push(newObj);
       currentAnswersData.push(axios.get('/qa/questions/' + question.question_id + '/answers').then((result) => { return result.data; }));
     });
     Promise.all(currentAnswersData).then((values) => {
       setCurrentAnswers(values);
     });
-    Promise.all(questionIDsArray).then((values) => {
-      setQuestionIDs(values);
-    });
+
 
   }, [currentQuestion]);
 

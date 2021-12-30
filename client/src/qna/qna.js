@@ -16,10 +16,13 @@ function Qna () {
   const [cqCopy, setCQCopy] = useState(null);
   const [query, setQuery] = useState("");
   const [filteredQuestions, setFilteredQuestions] = useState(null);
+  const [questionIDs, setQuestionIDs] = useState(null);
 
 
   let allQuestionsData = [];
   let currentQuestionData = [];
+  let questionIDsObj = {};
+
 
 
   useEffect(() => {
@@ -41,6 +44,12 @@ function Qna () {
     Promise.all(currentQuestionData).then((values) => {
       setCurrentQuestion(values[0].results);
       setCQCopy(values[0].results);
+      // console.log(values[0].results[0]);
+      for (let i = 0; i < values[0].results.length; i++) {
+        questionIDsObj[values[0].results[i]["question_id"]] = true;
+      }
+      // console.log(questionIDsObj)
+      setQuestionIDs(questionIDsObj);
     })
   }, []);
 
@@ -50,7 +59,7 @@ function Qna () {
     <div>
       <h1 id="QAHeader">Question & Answers</h1>
       {/* Passing down all the state values to SearchQuestions and IndividualQandA */}
-      <MainContext.Provider value={{products, setProducts, currentProductId, setCurrentProductId, allQuestions, setAllQuestions, currentQuestion, setCurrentQuestion, cqCopy, setCQCopy, query, setQuery, filteredQuestions, setFilteredQuestions}}>
+      <MainContext.Provider value={{products, setProducts, currentProductId, setCurrentProductId, allQuestions, setAllQuestions, questionIDs, setQuestionIDs, currentQuestion, setCurrentQuestion, cqCopy, setCQCopy, query, setQuery, filteredQuestions, setFilteredQuestions}}>
           <SearchQuestions />
           <IndividualQandA />
       </MainContext.Provider>
