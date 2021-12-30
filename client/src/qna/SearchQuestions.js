@@ -15,8 +15,8 @@ function SearchQuestions (props) {
   // When query length is 3 or more, runs filtered question and sets question list to the filtered list
   // When it goes back to less than 3, question list is set to the original again
   const onQueryChange = function () {
+    let filter = filteredQuestion();
     if (query.length >= 3) {
-      let filter = filteredQuestion();
       setCurrentQuestion(filter);
     } else {
       setCurrentQuestion(cqCopy)
@@ -27,7 +27,7 @@ function SearchQuestions (props) {
   // Filters current question list based on whether or not
   // the question in lower case contains lower case query string
   const filteredQuestion = function() {
-    const result = currentQuestion.filter(oneQuestion =>
+    const result = cqCopy.filter(oneQuestion =>
       oneQuestion.question_body.toLowerCase().includes(query.toLowerCase())
     );
     return result;
