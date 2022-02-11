@@ -6,7 +6,7 @@
 
 - Prith Jaganathan - *Software Engineer (Questions and Answers)*
 - Zach Fry - *Software Engineer (Product Overview)*
-- Brett Mogen - *Software Enginee (Ratings and Reviews)r*
+- Brett Mogen - *Software Enginee (Ratings and Reviews)*
 
 
 These three developers were given roughly 2 weeks to build out a fully functional shopping page from scratch according to a rough concept from a client.
@@ -36,4 +36,4 @@ once per session. If the user tries to do one of those actions twice, they will 
 - Users can add their own question by clicking on the Add Question button. A pop up modal will display where the user enters their name, email, and question.
 If all three of these fields are not filled out, the user will not be able to submit the form
 - Users can add their own answers by clicking on the Add Answer text located in each specific question box. A pop up modal will display where the user enters their name, email, and answer.
-If all three of these fields are not filled out, the user will not be able to submit the form
+-If all three of these fields are not filled out, the user will not be able to submit the form
