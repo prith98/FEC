@@ -24,8 +24,6 @@ This project's client app was built using the following primary technologies
     - Transpilation package used to convert ReactJS-specific syntax into browser-consumable JavaScript.
 - **Webpack**
     - Bundling package used to bundle javascript modules and component-focused stylesheets into ```.js``` and ```.css``` bundles for browser comsumption.
-- **Jest + React-Testing-Library**
-    - Testing framework and library used for unit tests, integration tests, and end-to-end tests.
 
 ---
 
@@ -37,5 +35,5 @@ based on whether or not the question contains the search query
 once per session. If the user tries to do one of those actions twice, they will get an alert saying they've already done that specific action this session
 - Users can add their own question by clicking on the Add Question button. A pop up modal will display where the user enters their name, email, and question.
 If all three of these fields are not filled out, the user will not be able to submit the form
-- Users can add their own question by clicking on the Add Answer text located in each specific question box. A pop up modal will display where the user enters their name, email, and question.
+- Users can add their own answers by clicking on the Add Answer text located in each specific question box. A pop up modal will display where the user enters their name, email, and answer.
 If all three of these fields are not filled out, the user will not be able to submit the form
