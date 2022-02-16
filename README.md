@@ -37,3 +37,12 @@ once per session. If the user tries to do one of those actions twice, they will 
 If all three of these fields are not filled out, the user will not be able to submit the form
 - Users can add their own answers by clicking on the Add Answer text located in each specific question box. A pop up modal will display where the user enters their name, email, and answer.
 -If all three of these fields are not filled out, the user will not be able to submit the form
+
+---
+
+## Screenshots of Application
+
+![Product Overview](https://i.imgur.com/NRvhF5h.png)
+![Question and Answers](https://i.imgur.com/ZEBAvKS.png)
+![Questions and Answers 2](https://i.imgur.com/MbgvsGI.png)
+![Ratings and Reviews](https://i.imgur.com/H5n5dRZ.png)
